@@ -13,33 +13,38 @@ namespace TestCase2.Controllers
     {
         private static List<MyPoint> points;
         // GET: Home
+        [HttpGet]
         public ActionResult Index()
         {
-            GraphicViewModel graph = new GraphicViewModel();
-            Graphic gr = new Graphic();
-            TakeDataFromFile takeData = new TakeDataFromFile(Server.MapPath("~/App_Data/input.txt"));
-            graph.Points = takeData.TakePoints();
-            ComputationPoints comp = new ComputationPoints(graph.Points);
-            graph.Points = comp.Compute();
-            graph.graphic = gr.DrawChart(graph.Points);
-           /* points = takeData.TakePoints();
-            ComputationPoints comp = new ComputationPoints(points);
-            points = comp.Compute();*/
-            return View(graph);
-        }
-        public ActionResult GetChart(List<MyPoint> p)
-        {
-            /*
             TakeDataFromFile takeData = new TakeDataFromFile(Server.MapPath("~/App_Data/input.txt"));
             points = takeData.TakePoints();
             ComputationPoints comp = new ComputationPoints(points);
-            points = comp.Compute();*/
+            points = takeData.TakePoints();
+            points = comp.Compute();
+            return View(points);
+        }
+        
+        public ActionResult GetChart()
+        {
             Graphic graphic = new Graphic();
             return graphic.DrawChart(points);
         }
 
-
-       
-      
+        [HttpPost]
+        public ActionResult MakeNewGraph()
+        {
+            ComputationPoints comp = new ComputationPoints(points);
+            points = comp.Compute();
+            return View("Index",points);
+        }
+        [HttpPost]
+        public ActionResult AddPoint(int x,int y)
+        {
+            MyPoint p = new MyPoint();
+            p.X = x;
+            p.Y = y;
+            points.Add(p);
+            return View("Index",points);
+        }
     }
 }

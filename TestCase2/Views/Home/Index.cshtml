@@ -1,19 +1,35 @@
-﻿@model TestCase2.Models.GraphicViewModel
+﻿@using TestCase2.Models
+@model List<MyPoint>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
+<h2>Тестовое задание</h2>
 
 <div>
-    <div>
-        @foreach (var p in Model.Points)
+    <div style="float:right;width:400px;">
+        <h4>Координаты отсортированных точек:</h4>
+        @for(int i=0;i<Model.Count;i++)
         {
-
+            <h5> Точка @i имеет координаты: (@Html.DisplayFor(m => m[i].X);@Html.DisplayFor(m => m[i].Y))</h5>
         }
     </div>
-    <div>
-        <img src="@Model.graphic"/>
+    <div style="float:left;width:710px;">
+        <img src="@Url.Action("GetChart")"/>
     </div>
+</div>
+
+<div style="float:left;margin-top:150px;">
+    @using (Html.BeginForm("AddPoint","Home",FormMethod.Post))
+    {
+        <p>Введите координату Х:</p>
+        <p> @Html.TextBox("X")</p>
+        <p>Введите координату У:</p>
+        <p>@Html.TextBox("Y")</p>
+        <p><input type="submit" value="Добавить точку" /></p>
+    }
+</div>
+
+<div style="float:left;margin-top:284px;margin-left:20px;">
+    @using (Html.BeginForm("MakeNewGraph", "Home", FormMethod.Post))
+    {
+        <p><input type="submit" value="Обработать данные" /></p>
+    }
 </div>

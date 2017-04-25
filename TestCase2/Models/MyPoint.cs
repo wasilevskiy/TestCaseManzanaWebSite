@@ -9,5 +9,6 @@ namespace TestCase2.Models
     {
         public int X { get; set; }
         public int Y { get; set; }
+        public string Index { get; set; }
     }
 }

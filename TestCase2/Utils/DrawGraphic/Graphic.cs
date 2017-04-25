@@ -62,7 +62,7 @@ namespace TestCase2.Utils.DrawGraphic
             {
                 int ptID = seriesDetail.Points.AddXY(result.X, result.Y);
                 point = seriesDetail.Points[ptID];
-                point.Label = "(#VALX; #VALY)";
+                point.Label =result.Index +  "-(#VALX; #VALY)";
                 point.Font = new System.Drawing.Font("Arial", 8f, FontStyle.Bold);
                 point.LabelForeColor = Color.Green;
             }
