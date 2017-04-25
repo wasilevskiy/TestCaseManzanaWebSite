@@ -1,0 +1,19 @@
+﻿@model TestCase2.Models.GraphicViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <div>
+        @foreach (var p in Model.Points)
+        {
+
+        }
+    </div>
+    <div>
+        <img src="@Model.graphic"/>
+    </div>
+</div>
